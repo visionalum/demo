@@ -53,25 +53,24 @@ function handleDrop(e){
   console.log("drop");
 
   e.preventDefault();
-  let dropable = e.target;
-  if (!dropable.classList.contains('dropable')) return;
-  
-  e.dataTransfer.getDate()
-}
+  let isTargetDropable = e.target.classList.contains('dropable');
+  if (!isTargetDropable) return;
+  if (isTargetDropable) {
+    let isTargetHome = e.target.classList.contains('right-home')
+    isTargetHome ? console.log("right") : console.log("wrong")
+    if(! isTargetHome){
+      this.style.scale = 1;
+    }
+    if(isTargetHome){
+      console.log("congratulation")
+      congatulation();
+    }
 
-function congatulation(e){
-  document.getElementById('kallu').style.opacity = 0;
-  document.getE
-}
-
-function handleDragOver(e){
-  data = e.dataTransfer.getData('application/json');
-  e.target.classList.contains('right-home') ? console.log("right") : console.log("wrong")
-  if(e.target.classList.contains('right-home')){
-    
-    setInterval(congatulation,300)
   }
+  
 }
+
+
 
 
 draggables.forEach(function (item) {
@@ -83,5 +82,10 @@ dropables.forEach(dropable => {
   dropable.addEventListener('dragenter',handleDragEnter);
   dropable.addEventListener('dragleave', handleDragLeave);
   dropable.addEventListener('drop', handleDrop);
-  dropable.addEventListener('dragover', handleDragOver);
+  dropable.addEventListener('dragover', (e)=>e.preventDefault());
 });
+
+
+function congatulation(e){
+  document.querySelector('.congrats-container').style.visibility = 'visible';
+}
